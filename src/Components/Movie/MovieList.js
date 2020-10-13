@@ -1,0 +1,20 @@
+import React from "react";
+import MovieCard from "./MovieCard";
+import { CardGroup } from "react-bootstrap";
+const MovieList = ({cardsInfo}) => {
+  return (
+    <CardGroup style={{justifyContent:"center"}}>
+      {cardsInfo.map((elm, i) => (
+        <MovieCard
+          title={elm.title}
+          rate={elm.rate}
+          imgSrc={elm.imgSrc}
+          description={elm.description}
+          posterUrl={elm.posterUrl}
+          key={i}
+        />
+      ))}
+    </CardGroup>
+  );
+};
+export default MovieList;
