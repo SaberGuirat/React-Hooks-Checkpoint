@@ -1,9 +1,9 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 import { CardGroup } from "react-bootstrap";
-const MovieList = ({cardsInfo}) => {
+const MovieList = ({ cardsInfo }) => {
   return (
-    <CardGroup style={{justifyContent:"center"}}>
+    <CardGroup style={{ justifyContent: "center" }}>
       {cardsInfo.map((elm, i) => (
         <MovieCard
           title={elm.title}

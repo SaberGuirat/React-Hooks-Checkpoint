@@ -9,49 +9,6 @@ import Footer from "./Components/Footer/Footer";
 function App() {
   const [cardsInfo, setCardsInfo] = useState([
     {
-      title: "Avengers",
-      rate: 5,
-      imgSrc: "Assets/avengers.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl: "https://amer.egybest.co/movie/avengers-endgame-2019#download",
-    },
-    {
-      title: "Avatar",
-      rate: 5,
-      imgSrc: "Assets/avatar.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl: "https://amer.egybest.co/movie/avatar-2009/#download",
-    },
-    {
-      title: "Alita: Battle Angel",
-      rate: 5,
-      imgSrc: "Assets/alita.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl:
-        "https://amer.egybest.co/movie/alita-battle-angel-2019/#download",
-    },
-    {
-      title: "Mulan",
-      rate: 3,
-      imgSrc: "Assets/mulan.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl:
-        "https://amer.egybest.co/movie/mulan-2020/?ref=trends-p1#download",
-    },
-    {
-      title: "King Arthur: Legend of the Sword",
-      rate: 4,
-      imgSrc: "Assets/kingarthur.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl:
-        "https://amer.egybest.co/movie/king-arthur-legend-of-the-sword-2017/?ref=home-trends#download",
-    },
-    {
       title: "Death of Me",
       rate: 1,
       imgSrc: "Assets/death.png",
@@ -70,6 +27,23 @@ function App() {
         "https://amer.egybest.co/movie/a-call-to-spy-2019/?ref=home-new#download",
     },
     {
+      title: "Avengers",
+      rate: 5,
+      imgSrc: "Assets/avengers.png",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
+      posterUrl: "https://amer.egybest.co/movie/avengers-endgame-2019#download",
+    },
+    {
+      title: "Mulan",
+      rate: 3,
+      imgSrc: "Assets/mulan.png",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
+      posterUrl:
+        "https://amer.egybest.co/movie/mulan-2020/?ref=trends-p1#download",
+    },
+    {
       title: "I Am Number Four",
       rate: 4,
       imgSrc: "Assets/number4.png",
@@ -77,6 +51,32 @@ function App() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
       posterUrl:
         "https://amer.egybest.co/movie/i-am-number-four-2011/#download",
+    },
+    {
+      title: "Avatar",
+      rate: 5,
+      imgSrc: "Assets/avatar.png",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
+      posterUrl: "https://amer.egybest.co/movie/avatar-2009/#download",
+    },
+    {
+      title: "King Arthur: Legend of the Sword",
+      rate: 4,
+      imgSrc: "Assets/kingarthur.png",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
+      posterUrl:
+        "https://amer.egybest.co/movie/king-arthur-legend-of-the-sword-2017/?ref=home-trends#download",
+    },
+    {
+      title: "Alita: Battle Angel",
+      rate: 5,
+      imgSrc: "Assets/alita.png",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
+      posterUrl:
+        "https://amer.egybest.co/movie/alita-battle-angel-2019/#download",
     },
   ]);
   //filter with title
@@ -107,11 +107,11 @@ function App() {
           Number(rate) && title.length > 0
             ? cardsInfo.filter(
                 (elm) =>
-                  Number(elm.rate) === Number(rate) &&
+                  Number(elm.rate) >= Number(rate) &&
                   elm.title.match(new RegExp(`${title}`, "gi"))
               )
             : Number(rate)
-            ? cardsInfo.filter((elm) => Number(elm.rate) === Number(rate))
+            ? cardsInfo.filter((elm) => Number(elm.rate) >= Number(rate))
             : title.length > 0
             ? cardsInfo.filter((elm) =>
                 elm.title.match(new RegExp(`${title}`, "gi"))

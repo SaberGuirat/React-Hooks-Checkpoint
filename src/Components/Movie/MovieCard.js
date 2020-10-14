@@ -11,12 +11,16 @@ const MovieCard = ({ title, description, posterUrl, rate, imgSrc }) => {
   return (
     <div className="box">
       <Card
-        style={{ width: "18rem", margin: 10 }}
-        className="text-center bg-dark text-white "
+        style={{ width: "18rem", margin: 10, background: "rgba(0,0,0,0.6)" }}
+        className="text-center  text-white "
       >
-        <Card.Header>{title}<br/>{rateDiv}</Card.Header>
+        <Card.Header>
+          {title}
+          <br />
+          {rateDiv}
+        </Card.Header>
         <Card.Body>
-          <Card.Img src={imgSrc} style={{height:280}} />
+          <Card.Img src={imgSrc} style={{ height: 280 }} />
           <Card.Text>{description}</Card.Text>
           <Button variant="primary" href={posterUrl} target="_blank">
             Watch Now

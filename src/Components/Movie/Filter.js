@@ -25,7 +25,7 @@ const Filter = ({ title, handleSearch, handleStarRating, rate }) => {
                 />
                 <BsStarFill
                   color={ratingValue <= rate ? "yellow" : "grey"}
-                  size="32px"
+                  size="24px"
                 />
               </label>
             );
