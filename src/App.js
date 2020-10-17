@@ -5,80 +5,14 @@ import MovieList from "./Components/Movie/MovieList";
 import Filter from "./Components/Movie/Filter";
 import AddMovie from "./Components/Movie/AddMovie";
 import Footer from "./Components/Footer/Footer";
+import MovieTrailer from "./Components/Movie/MovieTrailer";
+import { Route } from "react-router-dom";
+import "./App.css";
+import Data from "./Data";
 
 function App() {
-  const [cardsInfo, setCardsInfo] = useState([
-    {
-      title: "Death of Me",
-      rate: 1,
-      imgSrc: "Assets/death.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl:
-        "https://amer.egybest.co/movie/death-of-me-2020/?ref=home-new#download",
-    },
-    {
-      title: "A Call to Spy",
-      rate: 2,
-      imgSrc: "Assets/spy.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl:
-        "https://amer.egybest.co/movie/a-call-to-spy-2019/?ref=home-new#download",
-    },
-    {
-      title: "Avengers",
-      rate: 5,
-      imgSrc: "Assets/avengers.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl: "https://amer.egybest.co/movie/avengers-endgame-2019#download",
-    },
-    {
-      title: "Mulan",
-      rate: 3,
-      imgSrc: "Assets/mulan.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl:
-        "https://amer.egybest.co/movie/mulan-2020/?ref=trends-p1#download",
-    },
-    {
-      title: "I Am Number Four",
-      rate: 4,
-      imgSrc: "Assets/number4.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl:
-        "https://amer.egybest.co/movie/i-am-number-four-2011/#download",
-    },
-    {
-      title: "Avatar",
-      rate: 5,
-      imgSrc: "Assets/avatar.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl: "https://amer.egybest.co/movie/avatar-2009/#download",
-    },
-    {
-      title: "King Arthur: Legend of the Sword",
-      rate: 4,
-      imgSrc: "Assets/kingarthur.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl:
-        "https://amer.egybest.co/movie/king-arthur-legend-of-the-sword-2017/?ref=home-trends#download",
-    },
-    {
-      title: "Alita: Battle Angel",
-      rate: 5,
-      imgSrc: "Assets/alita.png",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum.",
-      posterUrl:
-        "https://amer.egybest.co/movie/alita-battle-angel-2019/#download",
-    },
-  ]);
+  const [cardsInfo, setCardsInfo] = useState(Data);
+
   //filter with title
   const [title, setTitle] = useState("");
   const searchMovie = (e) => {
@@ -94,35 +28,43 @@ function App() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
-      <Filter
-        title={title}
-        handleSearch={searchMovie}
-        rate={rate}
-        handleStarRating={handleStarRating}
+      <Route
+        exact
+        path="/"
+        render={() => (
+          <>
+            <Filter
+              title={title}
+              handleSearch={searchMovie}
+              rate={rate}
+              handleStarRating={handleStarRating}
+            />
+            <MovieList
+              cardsInfo={
+                Number(rate) && title.length > 0
+                  ? cardsInfo.filter(
+                      (elm) =>
+                        Number(elm.rate) >= Number(rate) &&
+                        elm.title.match(new RegExp(`${title}`, "gi"))
+                    )
+                  : Number(rate)
+                  ? cardsInfo.filter((elm) => Number(elm.rate) >= Number(rate))
+                  : title.length > 0
+                  ? cardsInfo.filter((elm) =>
+                      elm.title.match(new RegExp(`${title}`, "gi"))
+                    )
+                  : cardsInfo
+              }
+            />
+            <AddMovie cardsInfo={cardsInfo} setCardsInfo={setCardsInfo} />
+          </>
+        )}
       />
-      <MovieList
-        cardsInfo={
-          Number(rate) && title.length > 0
-            ? cardsInfo.filter(
-                (elm) =>
-                  Number(elm.rate) >= Number(rate) &&
-                  elm.title.match(new RegExp(`${title}`, "gi"))
-              )
-            : Number(rate)
-            ? cardsInfo.filter((elm) => Number(elm.rate) >= Number(rate))
-            : title.length > 0
-            ? cardsInfo.filter((elm) =>
-                elm.title.match(new RegExp(`${title}`, "gi"))
-              )
-            : cardsInfo
-        }
-      />
-      <AddMovie cardsInfo={cardsInfo} setCardsInfo={setCardsInfo} />
-      <br />
-      <Footer />
-    </div>
+      <Route exact path="/:id" component={MovieTrailer} />
+      <Route exact path="/" component={Footer}/>
+    </>
   );
 }
 

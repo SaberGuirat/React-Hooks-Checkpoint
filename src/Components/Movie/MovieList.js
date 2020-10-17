@@ -11,6 +11,7 @@ const MovieList = ({ cardsInfo }) => {
           imgSrc={elm.imgSrc}
           description={elm.description}
           posterUrl={elm.posterUrl}
+          id={elm.id}
           key={i}
         />
       ))}

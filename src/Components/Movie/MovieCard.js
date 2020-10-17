@@ -1,8 +1,9 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { BsStarFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
-const MovieCard = ({ title, description, posterUrl, rate, imgSrc }) => {
+const MovieCard = ({ title, description, posterUrl, rate, imgSrc, id }) => {
   let rateDiv = [];
   for (let i = 0; i < rate; i++) {
     rateDiv.push(<BsStarFill color="yellow" key={i} />);
@@ -24,7 +25,11 @@ const MovieCard = ({ title, description, posterUrl, rate, imgSrc }) => {
           <Card.Text>{description}</Card.Text>
           <Button variant="primary" href={posterUrl} target="_blank">
             Watch Now
-          </Button>
+          </Button>{" "}
+          <Link to={`/${id}`}>
+            {" "}
+            <Button variant="secondary">Watch Trailer</Button>
+          </Link>
         </Card.Body>
       </Card>
     </div>
